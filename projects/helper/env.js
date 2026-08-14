@@ -1,4 +1,3 @@
-
 const BOOL_KEYS = [
   'HISTORICAL',
   'LLAMA_DEBUG_MODE',
@@ -6,15 +5,11 @@ const BOOL_KEYS = [
   'IS_RUN_FROM_CUSTOM_JOB',
 ]
 
-const _yek = "b523cf66-7a5a-4fe8-8d67-f604fd0492c2"  // bifrost
-
 const DEFAULTS = {
   EVMOS_MULTICALL_CHUNK_SIZE: "3", // evmos reduced gas limit, this is a workaround to make multicall work
   SEI_BLOCK_LOW: "150023881",
   STARKNET_RPC: 'https://rpc.starknet.lava.build/',
   STARKNET_MULTICALL: '0x01a33330996310a1e3fa1df5b16c1e07f0491fdd20c441126e02613b948f0225',
-  COVALENT_KEY: 'ckey_72cd3b74b4a048c9bc671f7c5a6',
-  // SOLANA_RPC: 'https://mainnet.helius-rpc.com/?api-key=0109717a-77b4-498a-bc3c-a0b31aa1b3bf',
   SOLANA_RPC: "https://api.mainnet-beta.solana.com",
   SOON_RPC: "https://rpc.mainnet.soo.network/rpc",
   SOON_BASE_RPC: "https://rpc.soonbase.soo.network/rpc",
@@ -26,8 +21,6 @@ const DEFAULTS = {
   // SUI_GRAPH_RPC: 'https://sui-mainnet.mystenlabs.com/graphql',
   SUI_GRAPH_RPC: 'https://graphql.mainnet.sui.io/graphql',
   MULTIVERSX_RPC: 'https://api.multiversx.com',
-  ANKR_API_KEY: '79258ce7f7ee046decc3b5292a24eb4bf7c910d7e39b691384c7ce0cfb839a01',
-  SUBSCAN_API_KEY: 'ca3ba5ed1ff44b689c5f81dfc6b1644b',
   RENEC_RPC: "https://api-mainnet-beta.renec.foundation:8899/",
   FOGO_RPC: 'https://mainnet.fogo.io',
   COOKIECHAIN_RPC: 'https://rpc.cookiescan.io',
@@ -36,19 +29,16 @@ const DEFAULTS = {
   MOVE_RPC: 'https://mainnet.movementnetwork.xyz',
   SUPRA_RPC: 'https://rpc-mainnet.supra.com',
   IOTA_RPC: "https://api.mainnet.iota.cafe",
-  KASPLEX_RPC: "https://evmrpc.kasplex.org",
-  IGRA_RPC: "https://rpc.igralabs.com:8545",
+  KASPLEX_RPC: 'https://evmrpc.kasplex.org',
+  IGRA_RPC: 'https://rpc.igralabs.com:8545',
   MEGAETH_ARCHIVAL_RPC: 'https://megaeth.blockscout.com/api/eth-rpc',
   PEPU_RPC: 'https://pepuscan.com/api/eth-rpc',
   SAGA_RPC: "https://sagaevm.jsonrpc.sagarpc.io",
-  BIFROST_P_RPC: "wss://api-bifrost-polkadot.n.dwellir.com/" + _yek,
-  BIFROST_K_RPC: "wss://api-bifrost-kusama.n.dwellir.com/" + _yek,
-  BLOCKFROST_PROJECT_ID: 'mai'+'nnetBfkdsCOvb4BS'+'VA6pb1D43ptQ7t3cLt06',
+  BIFROST_P_RPC: "wss://api-bifrost-polkadot.n.dwellir.com/",
+  BIFROST_K_RPC: "wss://api-bifrost-kusama.n.dwellir.com/",
   VIRBICOIN_RPC: "https://rpc.digitalregion.jp",
   FUEL_CUSTOM_RPC: 'https://mainnet.fuel.network/v1/graphql',
-  TATUM_PUBLIC_API_KEY: "t-" + "698992414f6f4e3435d62161" + "-3d94ca2d70024efdaf3ca6fd",
   KEETA_RPC: "https://rep1.main.network.api.keeta.com/api",
-  CRYPTOAPIS_API_KEY: "35c1b8a" + "cd1119" + "b98dbe59e821ab734b87dfe6f84",
   PROPTECH_RPC: "https://mainnet.ptekcoin.com",
   WHITELISTED_MORPH_RPC: 'https://explorer.morphl2.io/api/eth-rpc',
   BCYPHER_RPC: "https://mainapi.bchscan.io,https://datahub-asia01.bchscan.io,https://datahub-asia02.bchscan.io",
@@ -90,9 +80,8 @@ const ENV_KEYS = [
 ]
 
 Object.keys(DEFAULTS).forEach(i => {
-  if (!process.env[i]) process.env[i] = DEFAULTS[i] // this is done to set the chain RPC details in @defillama/sdk
+  if (!process.env[i] && DEFAULTS[i] !== undefined) process.env[i] = DEFAULTS[i] // this is done to set the chain RPC details in @defillama/sdk
 })
-
 
 function getEnv(key) {
   if (!ENV_KEYS.includes(key)) throw new Error(`Unknown env key: ${key}`)
